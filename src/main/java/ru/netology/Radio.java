@@ -10,28 +10,27 @@ public class Radio {
 
     // установка станции через прямое указание номера
     public void setCurrentStation(int newCurrentStation) {
-        if (newCurrentStation < 0) {
-            return;
-        }
-        if (newCurrentStation > 9) {
+        if (newCurrentStation < 0 || newCurrentStation > 9) {
             return;
         }
         this.currentStation = newCurrentStation;
     }
 
     // переключение на следующую станцию
-    public void nextStation(int currentStation) {
+    public void nextStation() {
+        int currentStation = getCurrentStation();
         if (currentStation == 9) {
-            this.currentStation = 0;
+            setCurrentStation(0);
         } else {
             setCurrentStation(currentStation + 1);
         }
     }
 
     // переключение на предыдущую станцию
-    public void prevStation(int currentStation) {
+    public void prevStation() {
+        int currentStation = getCurrentStation();
         if (currentStation == 0) {
-            this.currentStation = 9;
+            setCurrentStation(9);
         } else {
             setCurrentStation(currentStation - 1);
         }
@@ -42,29 +41,29 @@ public class Radio {
     }
 
     // установка громкости звука
-    public void setCurrentVolume(int currentVolume) {
-        if (currentVolume < 0) {
+    public void setCurrentVolume(int newVolume) {
+        if (newVolume < 0 || newVolume > 100) {
             return;
         }
-        if (currentVolume > 100) {
-            return;
-        }
-        this.currentVolume = currentVolume;
+
+        this.currentVolume = newVolume;
     }
 
     // увеличение громкости звука
-    public void increaseVolume(int currentVolume) {
+    public void increaseVolume() {
+        int currentVolume = getCurrentVolume();
         if (currentVolume >= 100) {
             return;
         }
-        this.currentVolume = currentVolume + 1;
+        setCurrentVolume(currentVolume + 1);
     }
 
     // уменьшение громкости звука
-    public void decreaseVolume(int currentVolume) {
+    public void decreaseVolume() {
+        int currentVolume = getCurrentVolume();
         if (currentVolume <= 0) {
             return;
         }
-        this.currentVolume = currentVolume - 1;
+        setCurrentVolume(currentVolume - 1);
     }
 }
