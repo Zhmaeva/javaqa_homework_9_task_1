@@ -8,20 +8,17 @@ public class RadioTest {
 
     // тест конструктора с параметром (количество радиостанций)
     @Test
-    public void shouldSetAmountStations() {
-        Radio radioAmount = new Radio(12);
+    public void shouldSetStationsCount() {
+        Radio radioStation = new Radio(10);
 
-        radioAmount.setCurrentStation(13);
-        radioAmount.prevStation();
-        radioAmount.nextStation();
+        radioStation.setCurrentStation(9);
+        radioStation.prevStation();
+        radioStation.nextStation();
 
-        Assertions.assertEquals(12, radioAmount.getAmountStations());
-        Assertions.assertEquals(13, radioAmount.getMaxStation());
-        Assertions.assertEquals(0, radioAmount.getMinStation());
-        Assertions.assertEquals(13, radioAmount.getCurrentStation());
+        Assertions.assertEquals(9, radioStation.getCurrentStation());
     }
 
-    // тест на установку текущей радиостанции ниже допустимого значения 0-10
+    // тест на установку текущей радиостанции ниже допустимого значения 0-9
     @Test
     public void shouldSetCurrentStationBelowMin() {
         radio.setCurrentStation(-1);
@@ -32,10 +29,10 @@ public class RadioTest {
         Assertions.assertEquals(expected, actual);
     }
 
-    // тест на установку текущей радиостанции выше допустимого значения 0-10
+    // тест на установку текущей радиостанции выше допустимого значения 0-9
     @Test
     public void shouldSetCurrentStationAboveMax() {
-        radio.setCurrentStation(11);
+        radio.setCurrentStation(10);
 
         int expected = 0;
         int actual = radio.getCurrentStation();
@@ -43,18 +40,18 @@ public class RadioTest {
         Assertions.assertEquals(expected, actual);
     }
 
-    // тест на установку значения радиостанции в пределах допустимых значений 0-10
+    // тест на установку значения радиостанции в пределах допустимых значений 0-9
     @Test
     public void shouldSetCurrentStationWithinValidValue() {
-        radio.setCurrentStation(10);
+        radio.setCurrentStation(9);
 
-        int expected = 10;
+        int expected = 9;
         int actual = radio.getCurrentStation();
 
         Assertions.assertEquals(expected, actual);
     }
 
-    // тест на переключение следующей станции выше допустимого значения 0-10
+    // тест на переключение следующей станции выше допустимого значения 0-9
     @Test
     public void shouldSetNextStationAboveMax() {
         radio.setCurrentStation(11);
@@ -69,7 +66,7 @@ public class RadioTest {
     // тест на переключение следующей станции на максимальное допустимое значение
     @Test
     public void shouldSetNextStationToMax() {
-        radio.setCurrentStation(10);
+        radio.setCurrentStation(9);
         radio.nextStation();
 
         int expected = 0;
@@ -78,7 +75,7 @@ public class RadioTest {
         Assertions.assertEquals(expected, actual);
     }
 
-    // тест на переключение станции на следующую, если значение в пределах допустимых от 0 до 10
+    // тест на переключение станции на следующую, если значение в пределах допустимых от 0 до 9
     @Test
     public void shouldSetNextStationWithinValidValue() {
         radio.setCurrentStation(0);
@@ -96,13 +93,13 @@ public class RadioTest {
         radio.setCurrentStation(0);
         radio.prevStation();
 
-        int expected = 10;
+        int expected = 9;
         int actual = radio.getCurrentStation();
 
         Assertions.assertEquals(expected, actual);
     }
 
-    // тест на переключение станции на предыдущую, если значение в пределах допустимых значений 0-10
+    // тест на переключение станции на предыдущую, если значение в пределах допустимых значений 0-9
     @Test
     public void shouldSetPrevStationWithinValidValue() {
         radio.setCurrentStation(10);

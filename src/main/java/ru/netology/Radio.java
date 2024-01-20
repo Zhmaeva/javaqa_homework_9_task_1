@@ -2,49 +2,34 @@ package ru.netology;
 
 public class Radio {
     private int minStation = 0;
-    private int maxStation = 10;
-    private int amountStations = maxStation - 1;
+    private int maxStationValue = 9;
     private int currentStation;
     private int minVolume = 0;
     private int maxVolume = 100;
     private int currentVolume;
 
-    public Radio(int amountStations) {
-        this.amountStations = amountStations;
-        this.maxStation = amountStations + 1;
+    public Radio(int stationsCount) {
+        this.maxStationValue = stationsCount - 1;
     }
 
     public Radio() {
-        this.maxStation = getMaxStation();
     }
 
     public int getCurrentStation() {
         return currentStation;
     }
-    public int getMaxStation() {
-        return maxStation;
-    }
-
-    public int getMinStation() {
-        return minStation;
-    }
-
-    public int getAmountStations() {
-        return amountStations;
-    }
 
     // установка станции через прямое указание номера
     public void setCurrentStation(int newCurrentStation) {
-        if (newCurrentStation < minStation || newCurrentStation > maxStation) {
-            return;
+        if (newCurrentStation >= minStation && newCurrentStation <= this.maxStationValue) {
+            this.currentStation = newCurrentStation;
         }
-        this.currentStation = newCurrentStation;
     }
 
     // переключение на следующую станцию
     public void nextStation() {
         int currentStation = getCurrentStation();
-        if (currentStation == maxStation) {
+        if (currentStation == this.maxStationValue) {
             setCurrentStation(minStation);
         } else {
             setCurrentStation(currentStation + 1);
@@ -55,7 +40,7 @@ public class Radio {
     public void prevStation() {
         int currentStation = getCurrentStation();
         if (currentStation == minStation) {
-            setCurrentStation(maxStation);
+            setCurrentStation(this.maxStationValue);
         } else {
             setCurrentStation(currentStation - 1);
         }
